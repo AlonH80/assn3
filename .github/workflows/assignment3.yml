@@ -39,8 +39,8 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: install pytest
-        run: pip install -U pytest
+      - name: install tests requirements
+        run: pip install -r tests/requirements_tests.txt
       - name: run tests
         run: python -m pytest -v tests/assignment3_tests.py
       - name: shut down image
