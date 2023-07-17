@@ -1,7 +1,10 @@
 name: CI_flow
-on: push
+on:
+  push:
+
 jobs:
   build:
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -22,6 +25,7 @@ jobs:
           docker push $${{ secrets.DOCKER_USERNAME }}/meals $${{ secrets.DOCKER_USERNAME }}/meals:${{ env.date }}
 
   test:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -37,6 +41,7 @@ jobs:
 
 
   query:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
