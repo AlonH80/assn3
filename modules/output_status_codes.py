@@ -1,0 +1,21 @@
+import enum
+
+
+class ErrorCodes(enum.Enum):
+
+    CONTENT_NOT_JSON = 0
+    PARAMETER_NOT_SPECIFIED = -1
+    ALREADY_EXISTS = -2
+    UNRECOGNIZED_BY_API = -3
+    API_NOT_REACHABLE = -4
+    NOT_EXISTS = -5
+    DETAIL_IN_REQUEST_NOT_EXISTS = -6
+
+
+class HttpCodes(enum.Enum):
+
+    ACTION_SUCCESSFUL = 200
+    CREATED_SUCCESSFULLY = 201
+    NOT_EXISTS = 404
+    UNPROCESSABLE = 422
+    UNREACHABLE = 504

@@ -1,0 +1,51 @@
+name: CI_flow
+  on: push
+  jobs:
+    build:
+      steps:
+        - name: checkout
+          uses: actions/checkout@v3
+        - name: log in to docker hub
+          uses: docker/login-action@v2
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PWD }}
+        - name: set date
+          run: echo "DATE=$(date -I)" >> $GITHUB_ENV
+        - name: build image
+          run: |
+            docker build --tag $${{ secrets.DOCKER_USERNAME }}/meals .
+            docker tag $${{ secrets.DOCKER_USERNAME }}/meals $${{ secrets.DOCKER_USERNAME }}/meals:${{ env.date }}
+        - name: push to registry
+          run: |
+            docker push $${{ secrets.DOCKER_USERNAME }}/meals $${{ secrets.DOCKER_USERNAME }}/meals
+            docker push $${{ secrets.DOCKER_USERNAME }}/meals $${{ secrets.DOCKER_USERNAME }}/meals:${{ env.date }}
+
+    test:
+      steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-python@v4
+          with:
+            python-version: '3.10'
+        - name: run image
+          run: |
+            docker run --rm -p 8000:8000 --name meals $${{ secrets.DOCKER_USERNAME }}/meals:latest
+        - name: run tests
+          run: pytest -v tests/assignment3_tests.py
+        - name: shut down image
+          run: docker stop $${{ secrets.DOCKER_USERNAME }}/meals:latest
+
+
+    query:
+      steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-python@v4
+          with:
+            python-version: '3.10'
+        - name: run image
+          run: |
+            docker run --rm -p 8000:8000 --name meals $${{ secrets.DOCKER_USERNAME }}/meals:latest
+        - name: run queries
+          run: python tests/query_job.py
+        - name: shut down image
+          run: docker stop $${{ secrets.DOCKER_USERNAME }}/meals:latest

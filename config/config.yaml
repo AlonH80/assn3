@@ -1,0 +1,16 @@
+server:
+     name: 'dish_server'
+     host: '0.0.0.0'
+     port: 8000
+
+sql_connector:
+     db_name: "food.db"
+
+ninja_api:
+     ninja_url: "https://api.api-ninjas.com/v1/nutrition"
+     ninja_api_key_file: "ninja_api_key"
+     api_map_fields:
+          serving_size_g: "size"
+          sodium_mg: "sodium"
+          sugar_g: "sugar"
+          calories: "cal"

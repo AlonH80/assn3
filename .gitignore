@@ -1,0 +1,8 @@
+__pycache__
+*.db
+ninja_api_key
+.idea
+locals
+.pytest_cache
+tests/.pytest_cache
+*/*cache*

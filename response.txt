@@ -1,0 +1,5 @@
+orange contains 50.4 calories 1.0 mgs of sodium, and 8.4 grams of sugar
+salmon contains 208.7 calories 61.0 mgs of sodium, and 0.0 grams of sugar
+corn flakes contains 366.8 calories 723.0 mgs of sodium, and 9.6 grams of sugar
+green salad contains 23.4 calories 37.0 mgs of sodium, and 2.2 grams of sugar
+watermelon contains 30.3 calories 0.0 mgs of sodium, and 6.2 grams of sugar
