@@ -25,6 +25,7 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:${{ env.date }}
 
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -41,6 +42,7 @@ jobs:
 
 
   query:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
