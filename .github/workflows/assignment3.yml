@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       meals_and_dishes:
-        image: ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
+        image: $${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
         ports:
           - 8000:8000
     steps:
