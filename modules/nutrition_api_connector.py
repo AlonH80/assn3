@@ -18,6 +18,7 @@ class NutritionApiConnector:
 
     @cache
     def get_dish(self, dish_name):
+        print(f"{self.__base_url}?query={dish_name}", self.__api_request_kwargs)
         req = requests.get(f"{self.__base_url}?query={dish_name}", **self.__api_request_kwargs)
         output_data = {}
         status_code = req.status_code
