@@ -29,18 +29,20 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+    services:
+      meals_and_dishes:
+        image: ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
+        ports:
+          - 8000:8000
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: run image
-        run: |
-          docker run --rm -p 8000:8000 --name meals_and_dishes $${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
       - name: run tests
         run: pytest -v tests/assignment3_tests.py
       - name: shut down image
-        run: docker stop $${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
+        run: docker stop ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
 
 
   query:
@@ -53,8 +55,8 @@ jobs:
           python-version: '3.10'
       - name: run image
         run: |
-          docker run --rm -p 8000:8000 --name meals_and_dishes $${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
+          docker run --rm -p 8000:8000 --name meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
       - name: run queries
         run: python tests/query_job.py
       - name: shut down image
-        run: docker stop $${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
+        run: docker stop ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
