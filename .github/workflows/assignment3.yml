@@ -20,11 +20,11 @@ jobs:
       - name: build image
         run: |
           docker build -t meals_and_dishes .
-          docker tag meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:${{ env.date }}
+          docker tag meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:${{ env.DATE }}
       - name: push to registry
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes
-          docker push ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:${{ env.date }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:${{ env.DATE }}
 
   test:
     needs: build
