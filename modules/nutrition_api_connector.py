@@ -29,6 +29,7 @@ class NutritionApiConnector:
                 for key_in_api, output_field in self.__map_field_to_api.items():
                     iter_value_per_dish = map(lambda raw_dish: raw_dish.get(key_in_api), output_list)
                     output_data[output_field] = self.reduce_iterable_based_on_type(iter_value_per_dish)
+        print(status_code, output_data)
         return status_code, output_data
 
     @staticmethod
