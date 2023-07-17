@@ -5,7 +5,7 @@ class TestMealsAndDishesAPI:
 
     @classmethod
     def setup_class(cls) -> None:
-        cls.base_url = "http://127.0.0.1:8000"
+        cls.base_url = "http://0.0.0.0:8000"
         cls.dishes_url = f"{cls.base_url}/dishes"
         cls.meals_url = f"{cls.base_url}/meals"
         cls.dish_to_id = {}
