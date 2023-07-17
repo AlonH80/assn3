@@ -11,7 +11,7 @@ class NutritionApiConnector:
 
     def __init__(self, config):
         with open(config["ninja_api_key_file"]) as f:
-            self.__api_key = f.read()
+            self.__api_key = f.read().strip()
         self.__base_url = config["ninja_url"]
         self.__api_request_kwargs = {"verify": False, "headers": {"X-Api-Key": self.__api_key}}
         self.__map_field_to_api = config["api_map_fields"]
