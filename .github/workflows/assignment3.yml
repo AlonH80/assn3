@@ -29,24 +29,24 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
-#    services:
-#      meals_and_dishes:
-#        image: ahartanu/meals_and_dishes:latest
-#        ports:
-#          - 8000:8000
+    services:
+      meals_and_dishes:
+        image: ahartanu/meals_and_dishes:latest
+        ports:
+          - 8000:8000
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      - name: run image
-        run: docker run --rm -d -p 8000:8000 --name meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
+#      - name: run image
+#        run: docker run --rm -d -p 8000:8000 --name meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
       - name: install tests requirements
         run: pip install -r tests/requirements_tests.txt
       - name: run tests
         run: python -m pytest -v tests/assignment3_tests.py
-      - name: shut down image
-        run: docker stop ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
+#      - name: shut down image
+#        run: docker stop ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes
 
 
   query:
