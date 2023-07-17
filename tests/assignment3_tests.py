@@ -26,14 +26,14 @@ class TestMealsAndDishesAPI:
         dishes_to_create = ["orange", "spaghetti", "apple pie"]
         for dish in dishes_to_create:
             req = requests.post(self.dishes_url, headers={"Content-Type": "application/json"},
-                                data=json.dumps({"name": dish}))
+                                data=json.dumps({"name": dish}), timeout=1)
             output_status_code, output_content = req.status_code, req.content.decode().strip()
             assert output_status_code == 201
             self.dish_to_id[dish] = int(output_content)
         assert len(self.dish_to_id.values()) == len(set(self.dish_to_id.values()))
 
     def test_orange_sodium(self):
-        req = requests.get(f"{self.dishes_url}/{self.dish_to_id['orange']}")
+        req = requests.get(f"{self.dishes_url}/{self.dish_to_id['orange']}", timeout=1)
         output_status_code, output_content = req.status_code, json.loads(req.content)
         print(output_content)
         assert output_status_code == 200
@@ -47,14 +47,14 @@ class TestMealsAndDishesAPI:
 
     def test_blah(self):
         req = requests.post(self.dishes_url, headers={"Content-Type": "application/json"},
-                            data=json.dumps({"name": "blah"}))
+                            data=json.dumps({"name": "blah"}), timeout=1)
         output_status_code, output_content = req.status_code, int(req.content.decode())
         assert output_status_code in [400, 404, 422]
         assert output_content == -3
 
     def test_post_already_exists(self):
         req = requests.post(self.dishes_url, headers={"Content-Type": "application/json"},
-                            data=json.dumps({"name": "orange"}))
+                            data=json.dumps({"name": "orange"}), timeout=1)
         output_status_code, output_content = req.status_code, int(req.content.decode())
         assert output_status_code in [400, 404, 422]
         assert output_content == -2
@@ -64,7 +64,7 @@ class TestMealsAndDishesAPI:
                                                   "appetizer": self.dish_to_id['orange'],
                                                   "main": self.dish_to_id['spaghetti'],
                                                   "dessert": self.dish_to_id['apple pie']
-                                                  })
+                                                  }, timeout=1)
         output_status_code, output_content = req.status_code, int(req.content.decode())
         assert output_status_code == 201
         assert output_content > 0
@@ -83,7 +83,7 @@ class TestMealsAndDishesAPI:
                                                   "appetizer": self.dish_to_id['orange'],
                                                   "main": self.dish_to_id['spaghetti'],
                                                   "dessert": self.dish_to_id['apple pie']
-                                                  })
+                                                  }, timeout=1)
         output_status_code, output_content = req.status_code, int(req.content.decode())
         assert output_status_code in [400, 422]
         assert output_content == -2
