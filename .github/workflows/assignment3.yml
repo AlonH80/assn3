@@ -40,7 +40,7 @@ jobs:
         with:
           python-version: '3.10'
       - name: run tests
-        run: pytest -v tests/assignment3_tests.py
+        run: python -m pytest -v tests/assignment3_tests.py
       - name: shut down image
         run: docker stop ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
 
@@ -52,10 +52,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
       - name: run image
         run: |
-          docker run --rm -p 8000:8000 --name meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
+          docker run --rm -d -p 8000:8000 --name meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:latest
       - name: run queries
         run: python tests/query_job.py
       - name: shut down image
