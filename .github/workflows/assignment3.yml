@@ -19,8 +19,8 @@ jobs:
         run: echo ${{ secrets.NINJA_API_KEY }} > ninja_api_key
       - name: build image
         run: |
-          docker build -t meals_and_dishes .
-          docker tag meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:${{ env.DATE }}
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes .
+          docker tag ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes:${{ env.DATE }}
       - name: push to registry
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/meals_and_dishes
