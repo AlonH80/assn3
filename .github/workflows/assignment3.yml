@@ -58,7 +58,7 @@ jobs:
       - name: log container up
         run: echo "Container up and running" >> outputs/log.txt
       - name: run tests
-        run: python -m pytest -v tests/assignment3_tests.py 1>assn3_test_results.txt 2>&1
+        run: python -m pytest -v tests/assn3_tests.py 1>assn3_test_results.txt 2>&1
       - name: stop container
         run: docker stop meals_and_dishes:latest
       - name: log test succeed
