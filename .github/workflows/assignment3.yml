@@ -35,7 +35,7 @@ jobs:
       - name: Upload log
         uses: actions/upload-artifact@v3
         with:
-          name: .
+          name: outputs
           path: /tmp/log.txt
 
   test:
@@ -55,20 +55,20 @@ jobs:
       - name: run docker image
         run: docker run --rm -d --name meals_and_dishes meals_and_dishes:latest
       - name: log container up
-        run: echo "Container up and running" >> ./log.txt
+        run: echo "Container up and running" >> outputs/log.txt
       - name: run tests
         run: pytest -v tests/assignment3_tests.py 1>assn3_test_results.txt 2>&1
       - name: stop container
         run: docker stop meals_and_dishes:latest
       - name: log test succeed
-        run: echo "tests succeeded" >> ./log.txt
+        run: echo "tests succeeded" >> outputs/log.txt
       - name: log test failed
         if: failure()
-        run: echo "tests failed" >> ./log.txt
+        run: echo "tests failed" >> outputs/log.txt
       - name: Upload test log
         uses: actions/upload-artifact@v3
         with:
-          name: .
+          name: outputs
           path: assn3_test_results.txt
 
   query:
@@ -88,7 +88,7 @@ jobs:
       - name: run docker image
         run: docker run --rm -d --name meals_and_dishes meals_and_dishes:latest
       - name: log container up
-        run: echo "Container up and running" >> ./log.txt
+        run: echo "Container up and running" >> outputs/log.txt
       - name: run queries
         run: python tests/query_job.py
       - name: upload test results
@@ -99,6 +99,6 @@ jobs:
       - name: Upload query log
         uses: actions/upload-artifact@v3
         with:
-          name: .
+          name: outputs
           path: query_response.txt
 
