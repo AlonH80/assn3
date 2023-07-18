@@ -1,6 +1,7 @@
 __pycache__
 *.db
-*.txt
+response.txt
+assn3_test_results.txt
 ninja_api_key
 .idea
 locals

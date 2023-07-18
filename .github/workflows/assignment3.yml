@@ -61,11 +61,11 @@ jobs:
       - name: load docker image
         run: docker load --input from_build/meals_and_dishes.tar
 
+      - name: run docker image # Let image start-up while installing with pip
+        run: docker run --rm -d -p 8000:8000 --name meals_and_dishes meals_and_dishes:latest
+
       - name: install tests requirements
         run: pip install -r tests/requirements_tests.txt
-
-      - name: run docker image
-        run: docker run --rm -d -p 8000:8000 --name meals_and_dishes meals_and_dishes:latest
 
       - name: log container up
         run: |
@@ -115,14 +115,16 @@ jobs:
       - name: load docker image
         run: docker load --input from_build/meals_and_dishes.tar
 
+      - name: run docker image # Let image start-up while installing with pip
+        run: docker run --rm -d -p 8000:8000 --name meals_and_dishes meals_and_dishes:latest
+
       - name: install tests requirements
         run: pip install -r tests/requirements_tests.txt
 
-      - name: run docker image
-        run: docker run --rm -d -p 8000:8000 --name meals_and_dishes meals_and_dishes:latest
-
       - name: log container up
-        run: echo "Container up and running" >> outputs/log.txt
+        run: |
+          docker ps
+          echo "Container up and running" >> outputs/log.txt
 
       - name: run queries
         run: python tests/query_job.py
