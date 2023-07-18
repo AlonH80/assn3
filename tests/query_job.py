@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-jambo
+
 query_file = f"{os.path. dirname(__file__)}/query.txt"
 output_file = "response.txt"
 url = "http://0.0.0.0:8000"
