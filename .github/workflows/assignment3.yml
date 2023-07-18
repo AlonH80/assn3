@@ -73,7 +73,7 @@ jobs:
           echo "Container up and running" >> outputs/log.txt
 
       - name: run tests
-        run: python -m pytest -v tests/assn3_tests.py 1>assn3_test_results.txt 2>&1
+        run: python -m pytest -v assn3_tests.py 1>assn3_test_results.txt 2>&1
 
       - name: stop container
         if: always()
@@ -122,7 +122,7 @@ jobs:
         run: pip install -r tests/requirements_tests.txt
 
       - name: run queries
-        run: python tests/query_job.py
+        run: python query_job.py
 
       - name: stop container
         if: always()
