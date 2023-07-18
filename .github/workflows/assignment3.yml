@@ -33,6 +33,7 @@ jobs:
           name: from_build
           path: /tmp/meals_and_dishes.tar
       - name: Upload log
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: outputs
@@ -57,7 +58,7 @@ jobs:
       - name: log container up
         run: echo "Container up and running" >> outputs/log.txt
       - name: run tests
-        run: pytest -v tests/assignment3_tests.py 1>assn3_test_results.txt 2>&1
+        run: python -m pytest -v tests/assignment3_tests.py 1>assn3_test_results.txt 2>&1
       - name: stop container
         run: docker stop meals_and_dishes:latest
       - name: log test succeed
@@ -66,10 +67,17 @@ jobs:
         if: failure()
         run: echo "tests failed" >> outputs/log.txt
       - name: Upload test log
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: outputs
           path: assn3_test_results.txt
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: outputs
+          path: outputs/log.txt
 
   query:
     needs: test
@@ -101,4 +109,11 @@ jobs:
         with:
           name: outputs
           path: query_response.txt
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: outputs
+          path: outputs/log.txt
+
 
