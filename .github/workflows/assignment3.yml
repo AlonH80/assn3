@@ -121,24 +121,12 @@ jobs:
       - name: install tests requirements
         run: pip install -r tests/requirements_tests.txt
 
-      - name: log container up
-        run: |
-          docker ps
-          echo "Container up and running" >> outputs/log.txt
-
       - name: run queries
         run: python tests/query_job.py
 
       - name: stop container
         if: always()
         run: docker stop meals_and_dishes
-
-      - name: log test succeed
-        run: echo "query job succeeded" >> outputs/log.txt
-
-      - name: log test failed
-        if: failure()
-        run: echo "query job failed" >> outputs/log.txt
 
       - name: Upload query log
         uses: actions/upload-artifact@v3
