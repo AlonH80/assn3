@@ -63,7 +63,7 @@ jobs:
         run: python -m pytest -v tests/assn3_tests.py 1>assn3_test_results.txt 2>&1
       - name: stop container
         if: always()
-        run: docker stop meals_and_dishes:latest
+        run: docker stop meals_and_dishes
       - name: log test succeed
         run: echo "tests succeeded" >> outputs/log.txt
       - name: log test failed
