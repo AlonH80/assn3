@@ -22,9 +22,6 @@ class TestMealsAndDishesAPI:
         for i in json.loads(requests.get(cls.meals_url).content.decode()).keys():
             requests.delete(f"{cls.meals_url}/{i}")
 
-    def test_fail(self):
-        assert False
-
     def test_create_dishes(self):
         dishes_to_create = ["orange", "spaghetti", "apple pie"]
         for dish in dishes_to_create:
