@@ -1,5 +1,4 @@
 FROM python:3.11.3-slim-buster
-jambo
 WORKDIR /app
 COPY modules ./modules
 COPY processes ./processes
