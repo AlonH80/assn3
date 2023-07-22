@@ -1,6 +1,3 @@
+apple
+spaghetti
 orange
-salmon
-corn flakes
-green salad
-
-watermelon
